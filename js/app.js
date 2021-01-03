@@ -2,17 +2,14 @@ import { validate } from "./validate.js";
 
 $(document).ready(function() {
 
+    // Validation 
     const $inputs = $("input");
-    const $form = $('.needs-validation');
-
-    $form.submit(function(){
-        if ($form[0].checkValidity()) {
-            
-        }
-    });
 
     $inputs.blur(function() {
         const $input = $(this);
         validate($input);
     });
+
+    // Masks
+    $(".cpf").mask("000.000.000-00")
 });
