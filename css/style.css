@@ -1,8 +1,59 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 body {
-    background-color: #f0f2f5;
+  background-color: #f0f2f5;
+}
+
+#loading-animation {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: rgba(255,255,255,0.5);
+}
+
+.spinner-border {
+  position: fixed;
+  left: 50%;
+  top: 45%;
+  z-index: 1010;
 }
 
 #box-main-content {
-    border: 1px solid #d5d5d5;
-    border-radius: 6px;
+  border: 1px solid #d5d5d5;
+  border-radius: 6px;
+}
+
+.personal-section {
+  background-color: gray;
+  color: white;
+  border: none;
+}
+
+.personal-section:focus {
+  outline: none;
+}
+
+.personal-section:first-child {
+  border-top-left-radius: 6px;
+}
+
+.personal-section:first-child:active {
+  background-color: #444;
+  border: none;
+  border-right: 1px solid #222
+}
+
+.personal-section:last-child {
+  border-top-right-radius: 6px;
 }

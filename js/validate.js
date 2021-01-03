@@ -1,53 +1,28 @@
 import { dateValidator } from "./dateValidator.js";
-
-const errorMsgText = (type, validity) => {
-    let errorMsgText = "";
-
-    const errorTypes = ["valueMissing","typeMismatch"];
-
-    const errorMsgs = {
-        fullName: {
-            valueMissing: "O nome é necessário",
-        },
-        birthDate: {
-            valueMissing: "A data de nascimento é necessária"
-        },
-        cpfDocument: {
-            valueMissing: "O CPF é necessário",
-            customError: "Este CPF não é válido"
-        },
-        emailAddress: {
-            valueMissing: "O e-mail é necessário",
-            typeMismatch: "Este e-mail não é válido",
-        },
-    };
-
-    errorTypes.forEach(error => {
-        if(validity[error]) {
-            errorMsgText = errorMsgs[type][error];
-        }
-    });
-
-    return errorMsgText;
-}
+import { cpfValidator } from "./cpfValidator.js";
+import { phoneValidator } from "./phoneValidator.js";
+import { getAddressByCep } from "./getAddressByCep.js";
+import { errorMsgText } from "./errorMsgText.js"
 
 export const validate = ($input) => {
-    const input = $input[0];
+    const input = $input[0];    
     const $inputParent = $input.parent();
-    const errorMsg = $inputParent.find(".text-danger");
+    const $errorMsg = $inputParent.find(".text-danger");
     
     const type = $input.data().type;
     
-    const validators = {
+    const validatorsAndMethods = {
         birthDate: ($input) => dateValidator($input),
+        cpfDocument: ($input) => cpfValidator($input),
+        phoneNumber: ($input) => phoneValidator($input),
+        cepCode: ($input) => getAddressByCep($input),
     }
 
-    if (validators[type]) {
-        validators[type]($input);
+    if (validatorsAndMethods[type]) {
+        validatorsAndMethods[type]($input);
     }
 
     const isValid = input.validity.valid;
-    console.log(input.validity);
 
     if (isValid) {
 
@@ -60,12 +35,20 @@ export const validate = ($input) => {
         $input.removeClass("border-success");
         $input.addClass("border-danger");
 
-        if (errorMsg.length === 0) {
+        if ($errorMsg.length === 0) {
             const $newErrorMsg = $("<p></p>")
                 .addClass("text-danger")
-                .text(errorMsgText(type,input.validity));
+                .text(
+                    errorMsgText(type,input.validity) ??
+                    input.validationMessage
+                );
 
             $inputParent.append($newErrorMsg);
+        } else {
+            $errorMsg.text(
+                errorMsgText(type,input.validity) ??
+                input.validationMessage
+            )
         }
 
     }

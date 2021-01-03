@@ -9,6 +9,6 @@ export const dateValidator = ($input) => {
         return;
     }
     
-    input.setCustomValidity("Campo inválido");
+    input.setCustomValidity("A data inserida não é válida");
     return;
 }
