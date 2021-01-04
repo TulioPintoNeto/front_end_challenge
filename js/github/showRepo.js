@@ -14,24 +14,18 @@ export const showRepo = (repoList,owner,octokit) => {
         let $repositoryItem = layoutAccordionConstruct(repositoryNumber,repository,owner);
         $repositoryList.append($repositoryItem);
 
-        /*async function searchForIssues(repositoryNumber) {
-            const result = await octokit.request('GET /repos/{owner}/{repo}/issues', {
-                owner: owner,
-                repo: repository.name,
-                per_page: 100,
-            })
-        }*/
-
         repositoryNumber++;
     });
-
+    
+    $loadingAnimation.fadeOut();
 
     // GitHub API (Contributors and Issue) Search
     $(".accordion-button").click(function(){
         let $repositoryButton = $(this);
-        searchInRepo(octokit,$repositoryButton);
+        
+        if (!$repositoryButton.hasClass("loaded")) {
+            $repositoryButton.addClass("loaded");
+            searchInRepo(octokit,$repositoryButton);
+        }
     });
-    
-
-    $loadingAnimation.fadeOut();
 }

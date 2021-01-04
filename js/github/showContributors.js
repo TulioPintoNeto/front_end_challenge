@@ -1,7 +1,5 @@
 export const showContributors = (contributors,$repositoryButton) => {
-    const $loadingAnimation = $("#loading-animation");
 
-    let contributorNumber = 1;
     let $repositoryItem = $repositoryButton.parent().parent();
     var $fiveHundredList = $repositoryItem.find(".more-then-five-hundred");
     var $twoHundredList = $repositoryItem.find(".more-then-two-hundred");
@@ -24,9 +22,6 @@ export const showContributors = (contributors,$repositoryButton) => {
             $lessOneHundredList.parent().removeClass("d-none");
             $lessOneHundredList.append($contributorItem);
         }
-        
-        contributorNumber++;
     });
-
-    $loadingAnimation.fadeOut();
+    
 }

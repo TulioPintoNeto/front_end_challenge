@@ -7,6 +7,9 @@ export const doSearchOnGitHubAPI = (event,octokit) => {
 
     const $loadingAnimation = $("#loading-animation");
     $loadingAnimation.fadeIn();
+    
+    const $repositoryList = $("#repo-list");
+    $repositoryList.html("");
 
     $("#no-results-found").hide("fade");
     
@@ -15,15 +18,8 @@ export const doSearchOnGitHubAPI = (event,octokit) => {
     
     let owner = $("#search-input").val();
 
-    try {
-        type == "user" ?
-        doRepoUserSearch(owner,octokit) :
-        doRepoOrgSearch(owner,octokit);
-    } catch(e) {
-        console.log("Erro: "+e);
-        $("#no-results-found").show("fade");
-
-        $loadingAnimation.fadeOut();
-    }
+    type == "user" ?
+    doRepoUserSearch(owner,octokit) :
+    doRepoOrgSearch(owner,octokit);
     
 }
