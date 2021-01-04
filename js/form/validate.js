@@ -34,20 +34,21 @@ export const validate = ($input) => {
         
         $input.removeClass("border-success");
         $input.addClass("border-danger");
+        let customErrorText = input.validationMessage;
 
         if ($errorMsg.length === 0) {
-            const $newErrorMsg = $("<p></p>")
+            let $newErrorMsg = $("<p></p>")
                 .addClass("text-danger")
                 .text(
                     errorMsgText(type,input.validity) ??
-                    input.validationMessage
+                    customErrorText
                 );
 
             $inputParent.append($newErrorMsg);
         } else {
             $errorMsg.text(
                 errorMsgText(type,input.validity) ??
-                input.validationMessage
+                customErrorText
             )
         }
 

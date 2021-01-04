@@ -9,7 +9,7 @@ export const getAddressByCep = ($input) => {
         return;
     }
 
-    let $loadingAnimation = $("#loading-animation");
+    const $loadingAnimation = $("#loading-animation");
     $loadingAnimation.fadeIn();
 
     const url = `https://viacep.com.br/ws/${cepCode}/json/`;

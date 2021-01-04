@@ -1,10 +1,22 @@
-import { validate } from "./validate.js";
-import { finalResultData } from "./finalResultData.js"
+import { validate } from "./form/validate.js";
+import { finalResultData } from "./form/finalResultData.js";
+import { changeSection } from "./changeSection.js"
+import { doSearchOnGitHubAPI } from "./github/doSearchOnGitHubAPI.js";
+
 
 $(document).ready(function() {
+    
+    const $loadingAnimation = $("#loading-animation");
+    $loadingAnimation.fadeOut();
+    $("main").fadeIn();
+
+    // Menu
+    $("button.personal-section").click(function(){
+        changeSection($(this));
+    });
 
     // Validation 
-    const $inputs = $("input");
+    const $inputs = $("#form-section input");
 
     $inputs.blur(function() {
         const $input = $(this);
@@ -12,8 +24,13 @@ $(document).ready(function() {
     });
 
     // Result
-    $("form").submit(function(event) {
+    $("#form-section form").submit(function(event) {
         finalResultData(event);
+    });
+
+    // GitHub API Search
+    $("#github-section form").submit(function(event) {
+        doSearchOnGitHubAPI(event);
     });
 
     // Masks
