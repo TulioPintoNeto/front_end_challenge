@@ -2,9 +2,12 @@ import { validate } from "./form/validate.js";
 import { finalResultData } from "./form/finalResultData.js";
 import { changeSection } from "./changeSection.js"
 import { doSearchOnGitHubAPI } from "./github/doSearchOnGitHubAPI.js";
+import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
 
 
 $(document).ready(function() {
+
+    const octokit = new Octokit();
     
     const $loadingAnimation = $("#loading-animation");
     $loadingAnimation.fadeOut();
@@ -28,9 +31,9 @@ $(document).ready(function() {
         finalResultData(event);
     });
 
-    // GitHub API Search
+    // GitHub API Repo Search
     $("#github-section form").submit(function(event) {
-        doSearchOnGitHubAPI(event);
+        doSearchOnGitHubAPI(event,octokit);
     });
 
     // Masks

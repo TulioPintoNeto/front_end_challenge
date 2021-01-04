@@ -1,9 +1,5 @@
 import { layoutAccordionConstruct } from "./layoutAccordionConstruct.js";
-
-const showContributors = (contributors, repository) => {
-    console.log(repository);
-    console.log(contributors);
-}
+import { searchInRepo } from "./searchInRepo.js";
 
 export const showRepo = (repoList,owner,octokit) => {
     const $loadingAnimation = $("#loading-animation");
@@ -15,26 +11,27 @@ export const showRepo = (repoList,owner,octokit) => {
     repoList.forEach(function(repository) {
         var contributors;
 
-        let $repositoryItem = layoutAccordionConstruct(repositoryNumber,repository);
+        let $repositoryItem = layoutAccordionConstruct(repositoryNumber,repository,owner);
         $repositoryList.append($repositoryItem);
 
-        async function searchForContributors() {
-            const result = await octokit.request('GET /repos/{owner}/{repo}/contributors', {
+        /*async function searchForIssues(repositoryNumber) {
+            const result = await octokit.request('GET /repos/{owner}/{repo}/issues', {
                 owner: owner,
                 repo: repository.name,
-                per_page: 20,
-            });
-
-            contributors = result.data;
-
-            showContributors(contributors,repository.name);
-        }
-        
-        searchForContributors();
+                per_page: 100,
+            })
+        }*/
 
         repositoryNumber++;
     });
 
+
+    // GitHub API (Contributors and Issue) Search
+    $(".accordion-button").click(function(){
+        let $repositoryButton = $(this);
+        searchInRepo(octokit,$repositoryButton);
+    });
     
+
     $loadingAnimation.fadeOut();
 }

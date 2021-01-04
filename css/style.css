@@ -29,7 +29,7 @@ main {
   position: fixed;
   left: 50%;
   top: 45%;
-  z-index: 1010;
+  z-index: 9999;
 }
 
 #box-main-content {
