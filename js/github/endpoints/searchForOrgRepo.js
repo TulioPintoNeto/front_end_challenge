@@ -1,13 +1,13 @@
-import { showRepo } from "../showRepo.js";
+import { showRepo } from "../ui/showRepo.js";
 
-export async function doRepoUserSearch(owner,octokit) {
+export async function searchForOrgRepo(owner,octokit) {
     const $loadingAnimation = $("#loading-animation");
 
     var result;
 
     try {
-        result = await octokit.request('GET /users/{username}/repos', {
-            username: owner,
+        result = await octokit.request('GET /orgs/{org}/repos', {
+            org: owner,
             per_page: 100,
         });
     } catch (error) {

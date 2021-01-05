@@ -22,6 +22,12 @@ body {
   z-index: 2000;
 }
 
+.spinner-border {
+  position: fixed;
+  left: 50%;
+  top: 45%;
+}
+
 main {
   display: none;
 }
@@ -32,12 +38,6 @@ ul {
 
 li {
   word-wrap: break-word;
-}
-
-.spinner-border {
-  position: fixed;
-  left: 50%;
-  top: 45%;
 }
 
 #box-main-content {
@@ -91,4 +91,15 @@ li {
 
 .issue-button:nth-child(n+2) {
   border-left: 1px solid rgb(8,90,230);
+}
+
+#issues-list li:hover {
+  transform: translate(5px);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.modal-dialog {
+  max-width: 80%;
+  width: 80%;
 }

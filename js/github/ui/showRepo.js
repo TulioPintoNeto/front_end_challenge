@@ -1,5 +1,5 @@
-import { layoutAccordionConstruct } from "./layoutAccordionConstruct.js";
-import { searchInRepo } from "./searchInRepo.js";
+import { layoutAccordionConstruct } from "../layoutAccordionConstruct.js";
+import { searchInRepo } from "../searchInRepo.js";
 
 export const showRepo = (repoList,owner,octokit) => {
     const $loadingAnimation = $("#loading-animation");

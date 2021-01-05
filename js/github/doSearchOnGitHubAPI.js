@@ -1,5 +1,5 @@
-import { doRepoUserSearch } from "./endpoints/doRepoUserSearch.js";
-import { doRepoOrgSearch } from "./endpoints/doRepoOrgSearch.js";
+import { searchForUserRepo } from "./endpoints/searchForUserRepo.js";
+import { searchForOrgRepo } from "./endpoints/searchForOrgRepo.js";
 
 export const doSearchOnGitHubAPI = (event,octokit) => {
     event.preventDefault();
@@ -19,7 +19,7 @@ export const doSearchOnGitHubAPI = (event,octokit) => {
     let owner = $("#search-input").val();
 
     type == "user" ?
-    doRepoUserSearch(owner,octokit) :
-    doRepoOrgSearch(owner,octokit);
+    searchForUserRepo(owner,octokit) :
+    searchForOrgRepo(owner,octokit);
     
 }

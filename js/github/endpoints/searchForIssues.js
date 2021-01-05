@@ -27,5 +27,5 @@ export async function searchForIssues(octokit,$repositoryButton) {
         issues = issues.concat(result.data);
     }
 
-    showIssues(issues,$repositoryButton);
+    showIssues(issues,$repositoryButton,octokit);
 }
